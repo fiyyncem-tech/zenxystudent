@@ -1,0 +1,590 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#061109">
+<title>ZENXYSTUDENT | Global & Owner Access</title>
+<style>
+:root{--bg:#061109;--panel:#0b1c10;--panel2:#102719;--green:#39ff78;--green2:#00ff9c;--soft:#a1ffba;--border:#205d36;--muted:#829b89;--red:#ff6878}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:radial-gradient(ellipse at 15% 0%,#123b20 0,transparent 42%),radial-gradient(ellipse at 100% 100%,#092b18 0,transparent 42%),var(--bg);color:#effff2;font-family:Arial,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#061109ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:16px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;letter-spacing:2px;font-size:19px}.logo span{color:var(--green);text-shadow:0 0 12px #39ff7880}
+.online{font-size:10px;color:var(--green);letter-spacing:1px}
+main{max-width:900px;margin:auto;padding:18px 14px 40px}
+.hero{padding:20px 4px}.eyebrow{font-size:10px;letter-spacing:3px;color:var(--green)}h1{font-size:28px;margin:10px 0}h1 span{color:var(--green)}.sub{font-size:12px;color:var(--muted);line-height:1.7}
+.card{background:linear-gradient(145deg,#10291a,#09170d);border:1px solid var(--border);border-radius:13px;padding:16px;margin:13px 0;box-shadow:0 0 16px #39ff780d}
+.card h2,.card h3{font-size:15px;color:var(--green);margin-bottom:13px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{padding:15px;background:#0b1c10;border:1px solid var(--border);border-radius:11px}.stat small{font-size:10px;color:var(--muted)}.stat strong{display:block;color:var(--green);font-size:25px;margin-top:7px}
+.player{display:flex;gap:12px;align-items:center}.music-icon{font-size:28px;color:var(--green);text-shadow:0 0 15px var(--green)}.music-meta{min-width:0;flex:1}.music-meta b{font-size:13px}.music-meta small{display:block;color:var(--soft);font-size:10px;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.controls{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}.controls button{flex:1}
+input,select,textarea{width:100%;padding:12px;margin-top:7px;border-radius:8px;border:1px solid #287c46;background:#08170e;color:#fff;font-size:13px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 10px #39ff7830}
+label{display:block;font-size:11px;color:#a9c5ae;margin-top:13px}
+textarea{min-height:100px;resize:vertical;line-height:1.6}
+button{padding:11px 13px;border-radius:8px;border:1px solid var(--border);background:#153b25;color:#d9ffe2;font-weight:700;font-size:11px;cursor:pointer}
+button.primary{background:linear-gradient(100deg,#087b36,#00a95c);border-color:var(--green);color:white;box-shadow:0 0 12px #39ff7825}
+button.ghost{background:#102116}button.warn{border-color:#74313b;background:#32161b;color:#ffb4bd}
+button:active{transform:scale(.98)}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:5px 0 12px}
+.tab{white-space:nowrap;flex-shrink:0}.tab.active{background:linear-gradient(100deg,#087b36,#00a95c);border-color:var(--green);color:white}
+.page{display:none}.page.active{display:block}
+.note{font-size:11px;color:var(--muted);line-height:1.65;margin-top:10px}
+.result{background:#08170e;border:1px solid var(--green);border-radius:9px;padding:13px;margin-top:13px;white-space:pre-wrap;line-height:1.7;font-size:12px;overflow-wrap:anywhere}
+.record{border-top:1px solid #205d36;padding:12px 0;font-size:12px;line-height:1.7;overflow-wrap:anywhere}
+.badge{display:inline-block;padding:4px 7px;border-radius:5px;background:#123d22;color:#9dffb6;font-size:10px}
+.hidden{display:none!important}
+footer{text-align:center;color:#607c67;font-size:10px;padding:24px}
+hr{border:0;border-top:1px solid #205d36;margin:14px 0}
+@media(min-width:650px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.hero h1{font-size:36px}}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">ZENXY<span>STUDENT</span></div>
+ <div class="online">● SYSTEM READY</div>
+</header>
+
+<main>
+<section class="hero">
+ <div class="eyebrow">GLOBAL & OWNER ACCESS</div>
+ <h1>WELCOME TO <span>ZENXYSTUDENT</span></h1>
+ <p class="sub">Anti-scam case management • Refund assistance • Evidence records</p>
+</section>
+
+<section class="card">
+ <div class="player">
+  <div class="music-icon">♫</div>
+  <div class="music-meta">
+   <b>Cinnamon Girl</b>
+   <small id="trackName">Lana Del Rey · pilih fail audio untuk dimainkan</small>
+  </div>
+  <span class="badge">MUSIC</span>
+ </div>
+ <div class="controls">
+  <button class="ghost" id="chooseMusic">＋ PILIH LAGU</button>
+  <button class="primary" id="playMusic">▶ PLAY</button>
+  <button class="ghost" id="stopMusic">■ STOP</button>
+ </div>
+ <label for="volume">VOLUME</label>
+ <input id="volume" type="range" min="0" max="1" step=".01" value=".65">
+ <input id="audioFile" type="file" accept="audio/*" class="hidden">
+ <audio id="audio" loop></audio>
+ <p class="note">Pilih fail audio daripada peranti untuk dimainkan. Lagu tidak dimasukkan secara automatik ke dalam website.</p>
+</section>
+
+<section class="stats">
+ <div class="stat"><small>LOCAL CASE RECORDS</small><strong id="totalCases">0</strong></div>
+ <div class="stat"><small>PENDING CASES</small><strong id="pendingCases">0</strong></div>
+ <div class="stat"><small>REFUNDED</small><strong id="refundedCases">0</strong></div>
+ <div class="stat"><small>THIS DEVICE VISITS</small><strong id="visits">1</strong></div>
+</section>
+
+<nav class="tabs">
+ <button class="tab active" data-page="global">Global Access</button>
+ <button class="tab" data-page="refund">Refund Generator</button>
+ <button class="tab" data-page="number">Number Checker</button>
+ <button class="tab" data-page="cases">Case Records</button>
+ <button class="tab" data-page="owner">Owner Access</button>
+</nav>
+
+<section id="global" class="page active">
+ <div class="card">
+  <h2>GLOBAL ACCESS</h2>
+  <p class="sub">Akses awam untuk menyediakan mesej refund, menyemak format nombor dan mengurus rekod pada peranti sendiri.</p>
+  <div class="controls">
+   <button class="primary" data-go="refund">OPEN REFUND GENERATOR</button>
+   <button data-go="number">NUMBER CHECKER</button>
+   <button data-go="cases">MY CASE RECORDS</button>
+  </div>
+  <p class="note">Rekod disimpan dalam browser/peranti ini sahaja. Untuk berkongsi data antara semua pelawat, perlukan backend dan database.</p>
+ </div>
+ <div class="card">
+  <h3>Recent local cases</h3>
+  <div id="recentCases" class="note">Belum ada rekod.</div>
+ </div>
+</section>
+
+<section id="refund" class="page">
+ <div class="card">
+  <h2>REFUND MESSAGE GENERATOR</h2>
+  <label>Nama penerima / Recipient</label>
+  <input id="recipient" placeholder="Nama penerima">
+
+  <label>Jumlah (RM)</label>
+  <input id="amount" type="number" min="0.01" step="0.01" placeholder="150">
+
+  <label>Tarikh transaksi</label>
+  <input id="transactionDate" type="date">
+
+  <label>Sebab tuntutan</label>
+  <select id="reason">
+   <option>Barang atau perkhidmatan tidak diterima</option>
+   <option>Pesanan dibatalkan</option>
+   <option>Bayaran tidak diselesaikan seperti dijanjikan</option>
+   <option>Transaksi tersalah dibuat</option>
+   <option>Lain-lain</option>
+  </select>
+
+  <label>Bahasa</label>
+  <select id="language">
+   <option value="ms">Bahasa Melayu</option>
+   <option value="en">English</option>
+  </select>
+
+  <label>Maklumat tambahan (pilihan)</label>
+  <textarea id="details" placeholder="Nombor pesanan, rujukan transaksi atau maklumat lain..."></textarea>
+
+  <button class="primary" id="generate">GENERATE MESSAGE</button>
+
+  <div id="messageResult" class="hidden">
+   <div class="result" id="messageText"></div>
+   <button class="primary" id="copyMessage" style="width:100%;margin-top:10px">COPY MESSAGE</button>
+  </div>
+ </div>
+</section>
+
+<section id="number" class="page">
+ <div class="card">
+  <h2>GLOBAL NUMBER FORMAT CHECKER</h2>
+
+  <label>Kod negara</label>
+  <select id="country">
+   <option value="+60">Malaysia (+60)</option>
+   <option value="+62">Indonesia (+62)</option>
+   <option value="+65">Singapore (+65)</option>
+   <option value="+63">Philippines (+63)</option>
+   <option value="+66">Thailand (+66)</option>
+   <option value="+1">USA / Canada (+1)</option>
+   <option value="+44">United Kingdom (+44)</option>
+   <option value="+61">Australia (+61)</option>
+   <option value="+81">Japan (+81)</option>
+   <option value="+82">South Korea (+82)</option>
+   <option value="+91">India (+91)</option>
+  </select>
+
+  <label>Nombor telefon</label>
+  <input id="phone" inputmode="tel" placeholder="Contoh: 0123456789">
+
+  <button class="primary" id="checkNumber" style="width:100%;margin-top:14px">CHECK FORMAT</button>
+  <div id="numberResult" class="result hidden"></div>
+
+  <p class="note">Semakan ini hanya memformat nombor. Ia tidak mengenal pasti pemilik, Gmail, lokasi tepat atau membuktikan seseorang scammer.</p>
+ </div>
+</section>
+
+<section id="cases" class="page">
+ <div class="card">
+  <h2>CASE RECORDS</h2>
+
+  <label>Tajuk kes</label>
+  <input id="caseTitle" placeholder="Contoh: Pembelian dalam talian">
+
+  <label>Nombor berkaitan (pilihan)</label>
+  <input id="casePhone" placeholder="+60123456789">
+
+  <label>Jumlah kerugian (RM)</label>
+  <input id="caseAmount" type="number" min="0" step=".01" placeholder="150">
+
+  <label>Catatan / bukti yang disimpan</label>
+  <textarea id="caseNotes" placeholder="Catat tarikh, rujukan transaksi dan bukti yang dimiliki..."></textarea>
+
+  <label>Status</label>
+  <select id="caseStatus">
+   <option>Pending</option>
+   <option>Reported</option>
+   <option>Refunded</option>
+   <option>Closed</option>
+  </select>
+
+  <button class="primary" id="saveCase" style="width:100%;margin-top:14px">SAVE CASE</button>
+ </div>
+
+ <div class="card">
+  <h3>Saved records</h3>
+  <div id="recordsList" class="note">Belum ada rekod.</div>
+ </div>
+</section>
+
+<section id="owner" class="page">
+ <div class="card">
+  <h2>OWNER ACCESS</h2>
+  <p class="sub">Masukkan password untuk membuka panel owner.</p>
+
+  <label>Owner email (pilihan)</label>
+  <input id="ownerEmail" type="email" placeholder="Alamat e-mel owner">
+
+  <label>Password</label>
+  <input id="ownerPassword" type="password" placeholder="Masukkan owner password">
+
+  <button class="primary" id="ownerLogin" style="width:100%;margin-top:14px">OWNER LOGIN</button>
+  <div id="ownerMessage" class="note" role="status"></div>
+ </div>
+
+ <div class="card hidden" id="ownerPanel">
+  <h3>OWNER PANEL</h3>
+  <div class="record">Website visits: <b id="ownerVisits">1</b> <span class="badge">LOCAL DEMO</span></div>
+  <div class="record">Case records: <b id="ownerTotal">0</b></div>
+  <div class="record">Pending cases: <b id="ownerPending">0</b></div>
+  <p class="note">Statistik ini hanya daripada browser/peranti ini. Ia bukan statistik semua pelawat website.</p>
+  <button class="warn" id="ownerLogout" style="width:100%;margin-top:12px">LOGOUT</button>
+ </div>
+</section>
+
+<footer>
+ ZENXYSTUDENT © 2026 · NEON GREEN EDITION<br>
+ DOCUMENT • VERIFY • REPORT
+</footer>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+
+const STORE="zenxystudent_cases_v3";
+
+/* OWNER LOGIN
+   Login asas demo sahaja.
+   Password boleh dilihat melalui source code.
+*/
+const OWNER_PASSWORD="shafirakesayangan";
+
+function loadCases(){
+ try{
+  return JSON.parse(localStorage.getItem(STORE)||"[]");
+ }catch(e){
+  return [];
+ }
+}
+
+function saveCases(data){
+ localStorage.setItem(STORE,JSON.stringify(data));
+}
+
+function escapeHTML(s){
+ return String(s??"").replace(/[&<>"']/g,c=>({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#39;"
+ }[c]));
+}
+
+/* VISITS */
+let visits=Number(sessionStorage.getItem("zenxy_session_visits")||0)+1;
+sessionStorage.setItem("zenxy_session_visits",visits);
+$("visits").textContent=visits;
+$("ownerVisits").textContent=visits;
+
+/* NAVIGATION */
+function showPage(id){
+ document.querySelectorAll(".page").forEach(p=>{
+  p.classList.toggle("active",p.id===id);
+ });
+
+ document.querySelectorAll(".tab").forEach(t=>{
+  t.classList.toggle("active",t.dataset.page===id);
+ });
+
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.querySelectorAll(".tab").forEach(b=>{
+ b.addEventListener("click",()=>showPage(b.dataset.page));
+});
+
+document.querySelectorAll("[data-go]").forEach(b=>{
+ b.addEventListener("click",()=>showPage(b.dataset.go));
+});
+
+/* REFUND GENERATOR */
+$("generate").addEventListener("click",()=>{
+ const name=$("recipient").value.trim()||"pihak tuan/puan";
+ const amount=Number($("amount").value);
+
+ if(!Number.isFinite(amount)||amount<=0){
+  alert("Masukkan jumlah yang sah.");
+  return;
+ }
+
+ const date=$("transactionDate").value||"tidak dinyatakan";
+ const reason=$("reason").value;
+ const details=$("details").value.trim();
+
+ let msg;
+
+ if($("language").value==="ms"){
+  msg=`Salam sejahtera ${name}.
+
+Saya ingin membuat tuntutan pemulangan wang sebanyak RM${amount.toFixed(2)} bagi transaksi pada ${date}.
+
+Sebab tuntutan: ${reason}.
+${details?"\nMaklumat tambahan: "+details+"\n":""}
+Saya berharap pihak anda dapat memberikan penjelasan dan menyelesaikan perkara ini dengan memulangkan wang tersebut dalam tempoh yang munasabah. Mohon maklum balas berkenaan status pemulangan wang ini.
+
+Terima kasih.`;
+ }else{
+  msg=`Hello ${name},
+
+I would like to request a refund of RM${amount.toFixed(2)} for the transaction made on ${date}.
+
+Reason: ${reason}.
+${details?"\nAdditional details: "+details+"\n":""}
+Please provide an update and help resolve this matter by arranging the refund within a reasonable timeframe.
+
+Thank you.`;
+ }
+
+ $("messageText").textContent=msg;
+ $("messageResult").classList.remove("hidden");
+});
+
+$("copyMessage").addEventListener("click",async()=>{
+ const text=$("messageText").textContent;
+
+ try{
+  await navigator.clipboard.writeText(text);
+  alert("Mesej disalin.");
+ }catch(e){
+  alert("Salin teks mesej secara manual.");
+ }
+});
+
+/* NUMBER FORMAT CHECKER */
+$("checkNumber").addEventListener("click",()=>{
+ let digits=$("phone").value.trim().replace(/\D/g,"");
+
+ if(digits.length<7||digits.length>15){
+  $("numberResult").textContent="Nombor perlu mengandungi antara 7 hingga 15 digit.";
+  $("numberResult").classList.remove("hidden");
+  return;
+ }
+
+ const code=$("country").value;
+ const countryDigits=code.replace("+","");
+ 
+ if(digits.startsWith(countryDigits)){
+  digits=digits.slice(countryDigits.length);
+ }
+
+ if(digits.startsWith("0")){
+  digits=digits.slice(1);
+ }
+
+ const formatted=code+digits;
+
+ $("numberResult").textContent=
+ "FORMAT NUMBER\n"+
+ formatted+
+ "\n\nFormat asas berjaya disediakan. Ini bukan pengesahan pemilik atau reputasi nombor.";
+
+ $("numberResult").classList.remove("hidden");
+});
+
+/* SAVE CASE */
+$("saveCase").addEventListener("click",()=>{
+ const title=$("caseTitle").value.trim();
+ const rawAmount=$("caseAmount").value;
+ const amount=rawAmount===""?0:Number(rawAmount);
+
+ if(!title){
+  alert("Masukkan tajuk kes.");
+  return;
+ }
+
+ if(!Number.isFinite(amount)||amount<0){
+  alert("Jumlah tidak sah.");
+  return;
+ }
+
+ const cases=loadCases();
+
+ cases.unshift({
+  id:Date.now(),
+  title,
+  phone:$("casePhone").value.trim(),
+  amount,
+  notes:$("caseNotes").value.trim(),
+  status:$("caseStatus").value,
+  created:new Date().toLocaleString()
+ });
+
+ saveCases(cases);
+
+ $("caseTitle").value="";
+ $("casePhone").value="";
+ $("caseAmount").value="";
+ $("caseNotes").value="";
+
+ render();
+ alert("Rekod disimpan pada peranti ini.");
+});
+
+/* CASE STATUS */
+function changeStatus(id,status){
+ const cases=loadCases();
+ const item=cases.find(x=>x.id===id);
+
+ if(item){
+  item.status=status;
+  saveCases(cases);
+  render();
+ }
+}
+
+/* DELETE CASE */
+function deleteCase(id){
+ if(!confirm("Padam rekod ini?"))return;
+
+ saveCases(loadCases().filter(x=>x.id!==id));
+ render();
+}
+
+/* RENDER RECORDS */
+function render(){
+ const cases=loadCases();
+
+ $("totalCases").textContent=cases.length;
+
+ $("pendingCases").textContent=
+ cases.filter(x=>x.status==="Pending").length;
+
+ $("refundedCases").textContent=
+ cases.filter(x=>x.status==="Refunded").length;
+
+ $("ownerTotal").textContent=cases.length;
+
+ $("ownerPending").textContent=
+ cases.filter(x=>x.status==="Pending").length;
+
+ $("recentCases").innerHTML=cases.length
+ ?cases.slice(0,4).map(c=>`
+  <div class="record">
+   <b>${escapeHTML(c.title)}</b><br>
+   RM${Number(c.amount).toFixed(2)}
+   · ${escapeHTML(c.status)}
+   · ${escapeHTML(c.created)}
+  </div>
+ `).join("")
+ :"Belum ada rekod.";
+
+ $("recordsList").innerHTML=cases.length
+ ?cases.map(c=>`
+  <div class="record">
+   <b>${escapeHTML(c.title)}</b>
+   <span class="badge">${escapeHTML(c.status)}</span><br>
+
+   Nombor: ${escapeHTML(c.phone||"Tidak diberikan")}<br>
+   Jumlah: RM${Number(c.amount).toFixed(2)}<br>
+   Tarikh: ${escapeHTML(c.created)}<br>
+   Catatan: ${escapeHTML(c.notes||"-")}
+
+   <label>Kemaskini status</label>
+   <select onchange="changeStatus(${c.id},this.value)">
+    ${["Pending","Reported","Refunded","Closed"].map(s=>`
+     <option ${s===c.status?"selected":""}>${s}</option>
+    `).join("")}
+   </select>
+
+   <button class="warn" style="margin-top:9px"
+    onclick="deleteCase(${c.id})">DELETE</button>
+  </div>
+ `).join("")
+ :"Belum ada rekod.";
+}
+
+/* OWNER LOGIN */
+$("ownerPanel").classList.add("hidden");
+
+$("ownerLogin").addEventListener("click",()=>{
+ const password=$("ownerPassword").value;
+
+ if(password===OWNER_PASSWORD){
+  $("ownerMessage").textContent="OWNER ACCESS GRANTED.";
+  $("ownerMessage").style.color="#39ff78";
+  $("ownerPanel").classList.remove("hidden");
+  $("ownerPassword").value="";
+  render();
+ }else{
+  $("ownerMessage").textContent="PASSWORD SALAH. ACCESS DENIED.";
+  $("ownerMessage").style.color="#ff6878";
+  $("ownerPanel").classList.add("hidden");
+ }
+});
+
+/* OWNER LOGOUT */
+$("ownerLogout").addEventListener("click",()=>{
+ $("ownerPanel").classList.add("hidden");
+ $("ownerMessage").textContent="Anda telah log keluar.";
+ $("ownerMessage").style.color="#a1ffba";
+});
+
+/* INITIAL RENDER */
+render();
+
+/* MUSIC PLAYER */
+const audio=$("audio");
+let audioURL=null;
+
+$("chooseMusic").addEventListener("click",()=>{
+ $("audioFile").click();
+});
+
+$("audioFile").addEventListener("change",()=>{
+ const file=$("audioFile").files[0];
+
+ if(!file)return;
+
+ if(audioURL){
+  URL.revokeObjectURL(audioURL);
+ }
+
+ audioURL=URL.createObjectURL(file);
+ audio.src=audioURL;
+
+ $("trackName").textContent=file.name+" · fail pada peranti ini";
+
+ audio.play().then(()=>{
+  $("playMusic").textContent="Ⅱ PAUSE";
+ }).catch(()=>{
+  $("trackName").textContent=file.name+" · tekan PLAY";
+ });
+});
+
+$("playMusic").addEventListener("click",()=>{
+ if(!audio.src){
+  alert("Pilih fail audio dahulu.");
+  return;
+ }
+
+ if(audio.paused){
+  audio.play().then(()=>{
+   $("playMusic").textContent="Ⅱ PAUSE";
+  }).catch(()=>{
+   alert("Audio tidak dapat dimainkan.");
+  });
+ }else{
+  audio.pause();
+  $("playMusic").textContent="▶ PLAY";
+ }
+});
+
+$("stopMusic").addEventListener("click",()=>{
+ audio.pause();
+ audio.currentTime=0;
+ $("playMusic").textContent="▶ PLAY";
+});
+
+$("volume").addEventListener("input",e=>{
+ audio.volume=Number(e.target.value);
+});
+
+audio.volume=.65;
+</script>
+
+</body>
+</html>
